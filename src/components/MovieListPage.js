@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { NavLink } from "react-router-dom";
 function MovieListPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
@@ -18,9 +18,12 @@ function MovieListPage() {
 
   const movieItems = movies.map((movie) => {
     return (
-      <div >
+      <div key={movie.imdbID}>
         <img src={movie.Poster} alt='' />
         <h3>{movie.Title}</h3>
+        <NavLink to={`/${movie.imdbID}`}>
+          <button>Details</button>
+        </NavLink>
       </div>
     );
   });
