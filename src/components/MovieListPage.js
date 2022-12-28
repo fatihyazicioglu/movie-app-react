@@ -71,3 +71,5 @@ useEffect(
 }
 
 export default MovieListPage;
+
+
