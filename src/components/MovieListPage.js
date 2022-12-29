@@ -42,11 +42,33 @@ function MovieListPage() {
   const movieItems = movies.map((movie) => {
     return (
       <div key={movie.imdbID}>
-        <img src={movie.Poster} alt='' />
-        <h3>{movie.Title}</h3>
-        <NavLink to={`/${movie.imdbID}`}>
-          <button>Details</button>
-        </NavLink>
+        <div class='row justfiy-content-center'>
+          <div class='col col-lg-3'>
+            <div class='card mb-4 box-shadow '>
+              <img
+                class='card-img-top '
+                src={
+                  movie.Poster === "N/A" ? "/missingmovie.jpg" : movie.Poster
+                }
+                alt=''
+              />
+
+              <div class='card-body'>
+                <p class='card-text'>
+                  <h2>{movie.Title}</h2>
+                </p>
+                <div class='d-flex justify-content-between align-items-center'>
+                  <div class='btn-group'>
+                    <NavLink to={`/${movie.imdbID}`}>
+                      <button>Details</button>
+                    </NavLink>
+                  </div>
+                  <small class='text-muted'>{movie.Year}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   });
@@ -56,20 +78,36 @@ function MovieListPage() {
         <div class='container'>
           <h1 class='jumbotron-heading'>Movie Search</h1>
           <p class='lead text-muted'>
-            Start a search see what you will be watching tonight!
+            Start a search and see what you will be watching tonight!
           </p>
 
-          <input type='text' onChange={handleSearchTermChange} placeholder="Search movies, actors or more.." />
+          <input
+            type='text'
+            onChange={handleSearchTermChange}
+            placeholder='Search movies, actors or more..'
+          />
           <p>
-          <button onClick={() => fetchMovies(searchTerm)} class='btn btn-primary my-2 me-2'>Search</button>
-      <button onClick={clearResults} class='btn btn-secondary my-2'>Clear Results</button>
+            <button
+              onClick={() => fetchMovies(searchTerm)}
+              class='btn btn-primary my-2 me-2'
+            >
+              Search
+            </button>
+            <button onClick={clearResults} class='btn btn-secondary my-2'>
+              Clear Results
+            </button>
           </p>
         </div>
       </section>
-      
-      
-      
-      {movieItems}
+
+      {/* ------------------------ */}
+
+      {/*       
+<div class="album py-5 bg-light">
+        <div class="container"> */}
+      <div class='album py-5 bg-light'>
+        <div class='container'>{movieItems}</div>
+      </div>
       {noMoviesFound ? <h1>No Movies Found</h1> : null}
     </div>
   );
